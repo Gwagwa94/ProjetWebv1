@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Body;
 
 import java.io.IOException;
 
