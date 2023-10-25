@@ -1,4 +1,5 @@
 package org.example.Body;
+
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
@@ -10,3 +11,4 @@ public class Servlet extends SpringBootServletInitializer {
     }
 
 }
+
