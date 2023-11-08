@@ -40,4 +40,44 @@ public class API {
         // Afficher la réponse
         return response.body();
     }
+
+    public static String search(String entry, String token) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder().build();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(spotify + "v1/search?q=jingle&type=track"))
+                .header("Authorization", "Bearer " + token)
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
+
+    public static String getUser(String token) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder().build();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(spotify + "v1/me"))
+                .header("Authorization", "Bearer " + token)
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
+
+    public static String createPlaylist(String name, String token) throws IOException, InterruptedException {//, String user) throws IOException, InterruptedException {
+        String user = "31uvmn6finzqmtbebhkjbqrlvbcq"; //"vmcw5btl2ug2ioqnxe0q9guuh";
+        HttpClient client = HttpClient.newBuilder().build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(spotify + "v1/users/" + user + "/playlists"))
+                .header("Content-Type", "application.json")
+                .header("Authorization", "Bearer " + token)
+                .POST(HttpRequest.BodyPublishers.ofString("name=" + name + "&description=test&public=true"))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
 }
